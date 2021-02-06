@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 import {
   Card,
   CardContent,
@@ -7,30 +7,45 @@ import {
   Divider,
   Button,
 } from '@material-ui/core';
-import { KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import { DatePicker } from './DatePicker';
+import { TimePicker } from './TimePicker';
 
-export const Form = () => {
-  const [inputValue, setInputValue] = useState<string>('');
-  const [selectDate, setSelectDate] = useState<Date | null>(new Date());
-  const [selectTime, setSelectTime] = useState<Date | null>(new Date());
+interface FormProps {
+  isLoading: boolean;
+  setIsLoading: any;
+  setIsOpen: any;
+  inputValue: string;
+  setInputValue: any;
+  selectDate: Date | null;
+  setSelectDate: any;
+  selectTime: Date | null;
+  setSelectTime: any;
+}
 
-  const handleInpuntChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+export const Form: FC<FormProps> = (props) => {
+  const handleInpuntChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     event.preventDefault();
     const inputValue = event.target.value.toUpperCase();
-    setInputValue(inputValue);
+    props.setInputValue(inputValue);
   };
 
-  const handleDateChange = (date: Date | null) => {
-    setSelectDate(date);
+  const handleDateChange = (date: Date | null): void => {
+    props.setSelectDate(date);
   };
 
-  const handleTimeChange = (time: Date | null) => {
-    setSelectTime(time);
+  const handleTimeChange = (time: Date | null): void => {
+    props.setSelectTime(time);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert(`${inputValue} - ${selectDate} - ${selectTime}`);
+    props.setIsLoading(true);
+    setTimeout(() => {
+      props.setIsLoading(false);
+      props.setIsOpen(true);
+    }, 1000);
   };
 
   return (
@@ -53,34 +68,19 @@ export const Form = () => {
               }}
               placeholder='Enter your license plate'
               variant='outlined'
-              value={inputValue}
+              value={props.inputValue}
               onChange={handleInpuntChange}
               style={{ marginTop: 20 }}
               fullWidth
               required
             />
-            <KeyboardDatePicker
-              margin='normal'
-              id='date-picker-dialog'
-              label='Enter date to predict'
-              format='MM/dd/yyyy'
-              value={selectDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-              fullWidth
+            <DatePicker
+              selectDate={props.selectDate}
+              handleChangeDate={handleDateChange}
             />
-            <KeyboardTimePicker
-              margin='normal'
-              id='time-picker'
-              label='Enter time to predict'
-              value={selectTime}
-              onChange={handleTimeChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change time',
-              }}
-              fullWidth
+            <TimePicker
+              selectTime={props.selectTime}
+              handleSelectTime={handleTimeChange}
             />
             <Button
               type='submit'
@@ -88,6 +88,7 @@ export const Form = () => {
               color='primary'
               style={{ marginTop: 20 }}
               fullWidth
+              disabled={props.isLoading}
             >
               Predict
             </Button>
