@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
-interface DatePickerProps {
+export interface DatePickerProps {
   selectDate: Date | null;
   handleChangeDate: any;
 }

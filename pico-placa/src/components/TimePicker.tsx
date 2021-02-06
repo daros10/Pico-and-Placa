@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { KeyboardTimePicker } from '@material-ui/pickers';
 
-interface TimePickerProps {
+export interface TimePickerProps {
   selectTime: Date | null;
   handleSelectTime: any;
 }

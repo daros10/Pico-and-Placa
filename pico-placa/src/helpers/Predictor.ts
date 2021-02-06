@@ -138,10 +138,7 @@ function isInRangePicoPlaca(time: string, range: string[]): boolean {
 }
 
 function generateResponse(plateCode: string, time: string): string {
-  return `
-		Vehicle with license plate [${plateCode}] ending in [${getLastDigitOfLicensePlate(
+  return `Vehicle with license plate [${plateCode}] ending in [${getLastDigitOfLicensePlate(
     plateCode
-  )}] 
-		CANNOT circulate at [${time}].
-		`;
+  )}] CANNOT circulate at [${time}].`;
 }

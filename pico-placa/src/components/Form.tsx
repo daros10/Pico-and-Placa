@@ -10,7 +10,7 @@ import {
 import { DatePicker } from './DatePicker';
 import { TimePicker } from './TimePicker';
 
-interface FormProps {
+export interface FormProps {
   isLoading: boolean;
   setIsLoading: any;
   setIsOpen: any;
