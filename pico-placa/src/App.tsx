@@ -44,7 +44,7 @@ function App() {
         justify='center'
         alignItems='center'
       >
-        <Grid item xs={6}>
+        <Grid item xs={12} md={12} lg={12}>
           <Form
             isLoading={isLoading}
             setIsLoading={setIsLoading}

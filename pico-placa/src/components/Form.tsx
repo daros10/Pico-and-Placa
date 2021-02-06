@@ -66,7 +66,7 @@ export const Form: FC<FormProps> = (props) => {
               inputProps={{
                 maxLength: 8,
               }}
-              placeholder='Enter your license plate'
+              placeholder='Example: ABC-1234'
               variant='outlined'
               value={props.inputValue}
               onChange={handleInpuntChange}
